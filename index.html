@@ -1,515 +1,324 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ScopeWallet: find the work you never billed</title>
-  <meta name="description"
-    content="ScopeWallet checks your team's activity against the signed contract and flags unbilled and out-of-scope work before the invoice goes out.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap"
-    rel="stylesheet">
-  <style>
-    :root {
-      --paper: #F1F3F5;
-      --ink: #17202B;
-      --muted: #586271;
-      --line: #CFD5DC;
-      --billed: #0F6B4F;
-      --leak: #D9480F;
-      --leak-bg: #FCE9DF;
-      --white: #fff
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#f7f8fb" />
+<meta name="description" content="ScopeWallet helps service businesses find potential unbilled work and scope changes before invoicing." />
+<title>ScopeWallet — Protect the work you deliver</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#111827;--muted:#667085;--line:#e7eaf0;--paper:#f7f8fb;--white:#fff;--navy:#111a2c;--navy2:#19263b;--mint:#b9f5dc;--green:#087f5b;--lime:#c8f169;--amber:#f5b94c;--blue:#6f8cff;--shadow:0 24px 70px rgba(25,38,59,.10);--radius:24px}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:90px}body{margin:0;background:var(--paper);color:var(--ink);font-family:"DM Sans",sans-serif;-webkit-font-smoothing:antialiased}a{color:inherit;text-decoration:none}button,input,select,textarea{font:inherit}.wrap{width:min(1160px,calc(100% - 44px));margin:auto}.announcement{background:#121b2d;color:#dce5f3;text-align:center;padding:10px 16px;font-size:12px;letter-spacing:.02em}.announcement strong{color:var(--mint);font-weight:700}.nav{position:sticky;top:0;z-index:20;background:rgba(247,248,251,.84);backdrop-filter:blur(18px);border-bottom:1px solid rgba(231,234,240,.85)}.nav-inner{height:76px;display:flex;align-items:center;justify-content:space-between;gap:24px}.brand{display:flex;align-items:center;gap:11px;font:800 19px Manrope,sans-serif;letter-spacing:-.7px}.brand-mark{height:34px;width:34px;border-radius:11px;background:var(--navy);display:grid;place-items:center;color:var(--mint);box-shadow:0 5px 14px #111a2c25}.brand-mark svg{width:19px;height:19px}.nav-links{display:flex;align-items:center;gap:29px;color:#586174;font-size:13px;font-weight:600}.nav-links a:hover{color:var(--ink)}.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;border:0;border-radius:12px;padding:13px 18px;font-size:13px;font-weight:700;transition:transform .2s,box-shadow .2s,background .2s;cursor:pointer}.btn:hover{transform:translateY(-2px)}.btn-dark{background:var(--navy);color:white;box-shadow:0 8px 18px #111a2c20}.btn-dark:hover{background:#22324c;box-shadow:0 12px 24px #111a2c28}.btn-light{background:white;border:1px solid var(--line);color:var(--ink)}.btn-mint{background:var(--mint);color:#073d2c}.btn svg{width:16px;height:16px}.hero{padding:76px 0 68px;position:relative;overflow:hidden}.hero:before{content:"";position:absolute;inset:0;background-image:radial-gradient(#cfd5e0 1px,transparent 1px);background-size:23px 23px;mask-image:linear-gradient(to bottom,rgba(0,0,0,.55),transparent 72%);pointer-events:none;opacity:.45}.hero-glow{position:absolute;width:520px;height:520px;border-radius:50%;background:#c8f16938;filter:blur(85px);right:-160px;top:0;pointer-events:none}.hero-grid{position:relative;display:grid;grid-template-columns:1fr 1.02fr;align-items:center;gap:60px}.eyebrow{display:inline-flex;align-items:center;gap:8px;border:1px solid #dce3e9;background:#ffffffb8;border-radius:100px;padding:7px 11px;color:#3d5c51;font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase}.pulse{height:7px;width:7px;border-radius:50%;background:#21b887;box-shadow:0 0 0 4px #21b8871e}.hero h1{font:800 clamp(42px,5vw,64px)/1.05 Manrope,sans-serif;letter-spacing:-3.2px;margin:22px 0 20px;max-width:610px}.hero h1 em{font-style:normal;color:#637a31;position:relative;white-space:nowrap}.hero-copy{font-size:17px;line-height:1.75;color:#626c7d;max-width:515px;margin:0 0 27px}.hero-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.micro-proof{display:flex;align-items:center;gap:10px;margin-top:23px;color:#7b8493;font-size:11px}.avatars{display:flex;padding-left:4px}.avatars span{width:25px;height:25px;margin-left:-4px;border:2px solid var(--paper);border-radius:50%;display:grid;place-items:center;background:#e1e7d6;font-size:9px;font-weight:800;color:#41513b}.micro-proof b{color:#374151}.hero-visual{position:relative;min-width:0;perspective:1000px}.dash{position:relative;background:var(--navy);border:1px solid #27334a;border-radius:22px;padding:17px;color:white;box-shadow:0 35px 85px #18243a2a;transform:rotateY(-3deg) rotateX(1deg);overflow:hidden}.dash:before{content:"";position:absolute;top:-120px;right:-70px;width:300px;height:300px;background:#b9f5dc12;filter:blur(30px);border-radius:50%}.dash-top{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #ffffff15;padding:0 2px 16px;position:relative}.dash-brand{display:flex;align-items:center;gap:9px;font-size:12px;font-weight:700}.tiny-mark{width:24px;height:24px;border-radius:7px;background:var(--mint);color:var(--navy);display:grid;place-items:center;font-weight:900}.dash-project{font-size:10px;color:#a8b3c5;background:#ffffff0b;border:1px solid #ffffff12;border-radius:8px;padding:7px 9px}.dash-heading{display:flex;justify-content:space-between;align-items:end;margin:21px 2px 15px;position:relative}.dash-heading span{display:block;color:#93a0b5;font-size:10px;margin-bottom:5px}.dash-heading strong{font:700 20px Manrope,sans-serif;letter-spacing:-.7px}.status-pill{color:var(--mint);background:#b9f5dc13;border:1px solid #b9f5dc25;border-radius:100px;padding:6px 8px;font-size:9px}.stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;position:relative}.stat{background:#ffffff08;border:1px solid #ffffff10;border-radius:12px;padding:12px}.stat label{display:block;color:#96a2b7;font-size:9px;margin-bottom:9px}.stat strong{font:700 20px Manrope,sans-serif;letter-spacing:-.7px}.stat small{display:block;color:#c2d1a5;font-size:9px;margin-top:6px}.work-card{margin-top:13px;border:1px solid #ffffff14;background:#ffffff06;border-radius:13px;overflow:hidden;position:relative}.work-head,.work-line{display:grid;grid-template-columns:1.5fr .8fr .72fr;gap:8px;align-items:center;padding:11px 12px}.work-head{font-size:8px;color:#8592a8;text-transform:uppercase;letter-spacing:.08em;background:#ffffff04}.work-line{border-top:1px solid #ffffff0b;font-size:10px;color:#e9edf5}.work-line span:nth-child(2){color:#9ca8ba}.tag{display:inline-flex;align-items:center;gap:5px;border-radius:6px;padding:5px 6px;font-size:8px;font-weight:700;width:max-content}.tag:before{content:"";height:5px;width:5px;border-radius:50%;background:currentColor}.tag.ok{background:#b9f5dc14;color:var(--mint)}.tag.warn{background:#f5b94c18;color:#ffd37b}.tag.review{background:#a9b8ff18;color:#bdc8ff}.dash-foot{display:flex;justify-content:space-between;align-items:center;padding:13px 2px 1px;color:#93a0b5;font-size:9px}.dash-foot b{color:#e8edf6}.float-note{position:absolute;right:-20px;bottom:35px;display:flex;align-items:center;gap:10px;background:white;border:1px solid #e6eaf0;border-radius:14px;padding:12px 15px;box-shadow:0 16px 35px #17243a1c;animation:float 5s ease-in-out infinite}.float-icon{width:32px;height:32px;border-radius:10px;background:#fff3d8;display:grid;place-items:center;color:#a56b00}.float-icon svg{width:17px;height:17px}.float-note b{display:block;font-size:11px}.float-note small{display:block;color:#7b8493;font-size:10px;margin-top:3px}@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}.logo-strip{padding:24px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:#fff9}.logo-inner{display:flex;align-items:center;justify-content:space-between;gap:20px}.logo-label{font-size:10px;line-height:1.5;color:#8991a0;text-transform:uppercase;letter-spacing:.1em;max-width:145px}.audience{display:flex;gap:9px;flex-wrap:wrap}.audience span{display:inline-flex;align-items:center;gap:8px;padding:10px 13px;border:1px solid var(--line);border-radius:11px;background:#fff;font-size:11px;font-weight:600;color:#566174}.audience svg{width:15px;height:15px;color:#76845a}.section{padding:100px 0}.section-head{max-width:650px;margin-bottom:42px}.kicker{font-size:11px;text-transform:uppercase;letter-spacing:.13em;color:#70824c;font-weight:800}.section h2{font:800 clamp(31px,4vw,46px)/1.12 Manrope,sans-serif;letter-spacing:-2px;margin:14px 0}.section-head p{font-size:15px;line-height:1.8;color:var(--muted);max-width:580px;margin:0}.problem-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:22px;align-items:stretch}.problem-copy{border-radius:var(--radius);background:var(--navy);color:white;padding:35px;position:relative;overflow:hidden}.problem-copy:after{content:"";position:absolute;width:260px;height:260px;right:-130px;bottom:-140px;background:#b9f5dc22;border-radius:50%;filter:blur(20px)}.problem-copy .kicker{color:var(--mint)}.problem-copy h3{font:700 29px/1.2 Manrope,sans-serif;letter-spacing:-1.1px;max-width:370px;margin:18px 0}.problem-copy p{color:#aab6c9;font-size:14px;line-height:1.8;max-width:380px}.problem-copy ul{list-style:none;margin:25px 0 0;padding:0;display:grid;gap:14px;position:relative;z-index:1}.problem-copy li{display:flex;gap:10px;color:#e0e7f1;font-size:12px;line-height:1.6}.problem-copy li svg{width:16px;height:16px;flex-shrink:0;color:var(--mint);margin-top:1px}.example-panel{border:1px solid var(--line);border-radius:var(--radius);background:#fff;padding:27px;box-shadow:0 10px 35px #16223b06}.panel-top{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:22px}.panel-top strong{font:700 15px Manrope,sans-serif}.panel-top span{font-size:10px;color:#7e8795;background:#f3f5f8;padding:7px 9px;border-radius:7px}.example-row{display:grid;grid-template-columns:35px 1fr auto;align-items:center;gap:12px;padding:15px 0;border-bottom:1px solid #eef0f4}.example-row:last-child{border-bottom:0}.row-icon{height:34px;width:34px;display:grid;place-items:center;border-radius:10px;background:#f2f5f2;color:#647a4b}.row-icon svg{width:17px;height:17px}.example-row b{display:block;font-size:12px}.example-row small{display:block;color:#8991a0;font-size:10px;margin-top:4px}.example-row .tag{font-size:9px}.bento{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.feature{background:white;border:1px solid var(--line);border-radius:20px;padding:25px;min-height:230px;position:relative;overflow:hidden;transition:transform .25s,box-shadow .25s}.feature:hover{transform:translateY(-4px);box-shadow:0 18px 45px #17243a0b}.feature.large{grid-column:span 2;background:#eef4ed}.feature.dark{background:var(--navy);color:white;border-color:var(--navy)}.feature-icon{height:42px;width:42px;border:1px solid #e7ebdf;background:#f6f8f2;border-radius:13px;display:grid;place-items:center;color:#607747;margin-bottom:28px}.feature-icon svg{width:20px;height:20px}.feature.dark .feature-icon{background:#ffffff0d;border-color:#ffffff1a;color:var(--mint)}.feature h3{font:700 18px Manrope,sans-serif;letter-spacing:-.5px;margin:0 0 9px}.feature p{font-size:12px;line-height:1.8;color:#788191;margin:0;max-width:340px}.feature.dark p{color:#aeb9cb}.feature-graphic{position:absolute;right:20px;bottom:17px;display:flex;align-items:center;gap:6px;opacity:.9}.mini-bar{width:9px;border-radius:4px 4px 2px 2px;background:#8fa56a}.feature.large .feature-graphic{right:24px;bottom:23px}.flow-step{display:flex;align-items:center;gap:7px;font-size:9px;color:#6d7c53;background:#ffffffb8;border:1px solid #dce4d3;border-radius:8px;padding:8px}.flow-step svg{width:13px;height:13px}.calculator-wrap{background:var(--navy);border-radius:28px;padding:clamp(24px,4vw,46px);color:white;display:grid;grid-template-columns:.9fr 1.1fr;gap:50px;position:relative;overflow:hidden}.calculator-wrap:before{content:"";position:absolute;width:420px;height:420px;right:-160px;top:-240px;border-radius:50%;background:#c8f16922;filter:blur(45px)}.calc-copy,.calc-card{position:relative}.calc-copy .kicker{color:var(--mint)}.calc-copy h2{font-size:clamp(30px,4vw,42px);letter-spacing:-1.8px;margin:16px 0}.calc-copy p{font-size:13px;line-height:1.8;color:#aab6c9;max-width:380px}.calc-disclaimer{font-size:10px!important;color:#8290a5!important;margin-top:20px}.calc-card{background:#fff;color:var(--ink);border-radius:20px;padding:24px}.field{margin-bottom:20px}.field-top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:11px}.field label{font-size:11px;font-weight:700;color:#374151}.field output{font:700 13px Manrope,sans-serif}.range{width:100%;accent-color:#688249;cursor:pointer}.range-scale{display:flex;justify-content:space-between;color:#9299a5;font-size:9px;margin-top:6px}.calc-bottom{border-top:1px solid var(--line);padding-top:18px;display:flex;align-items:end;justify-content:space-between;gap:15px}.calc-bottom small{display:block;color:#7e8795;font-size:10px;margin-bottom:6px}.calc-result{font:800 30px Manrope,sans-serif;letter-spacing:-1.5px}.calc-bottom .btn{white-space:nowrap;padding:12px 13px}.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:25px;counter-reset:steps}.step{border-top:1px solid #dfe4e9;padding-top:20px}.step-number{height:34px;width:34px;border-radius:10px;background:#edf2e6;color:#617849;display:grid;place-items:center;font:800 12px Manrope,sans-serif;margin-bottom:23px}.step h3{font:700 16px Manrope,sans-serif;letter-spacing:-.3px;margin:0 0 9px}.step p{font-size:12px;line-height:1.8;color:#7a8392;margin:0}.pilot-section{padding:20px 0 100px}.pilot-shell{background:#edf1e8;border:1px solid #e1e8d9;border-radius:28px;padding:clamp(24px,5vw,54px);display:grid;grid-template-columns:.8fr 1.2fr;gap:45px;align-items:start}.pilot-copy h2{font:800 clamp(31px,4vw,44px)/1.1 Manrope,sans-serif;letter-spacing:-2px;margin:16px 0}.pilot-copy p{color:#6e786b;font-size:13px;line-height:1.8}.pilot-benefits{display:grid;gap:12px;margin-top:24px}.pilot-benefits div{display:flex;align-items:center;gap:9px;font-size:11px;color:#4d5b48}.pilot-benefits svg{width:16px;height:16px;color:#608046}.form-shell{background:white;border:1px solid #e3e7de;border-radius:19px;padding:16px;box-shadow:0 15px 40px #17243a0a}.form-note{display:flex;align-items:center;gap:9px;padding:10px 10px 14px;font-size:10px;color:#798274}.form-note svg{width:16px;height:16px;color:#6c8551}.tally-frame{width:100%;height:590px;border:0;border-radius:12px;background:#fff}.faq-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:55px}.faq-grid .section-head{margin:0}.faq-list{border-top:1px solid var(--line)}details{border-bottom:1px solid var(--line);padding:18px 0}summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:20px;font-size:13px;font-weight:700}summary::-webkit-details-marker{display:none}summary:after{content:"+";font-size:20px;line-height:1;color:#74815b}details[open] summary:after{content:"−"}details p{font-size:12px;line-height:1.8;color:#7b8493;max-width:600px;margin:13px 30px 0 0}.footer{background:#111a2c;color:#dce4f0;padding:38px 0}.footer-main{display:flex;align-items:center;justify-content:space-between;gap:25px}.footer .brand{color:white}.footer p{font-size:11px;color:#93a0b5}.footer-links{display:flex;gap:20px;color:#b7c1d1;font-size:11px}.footer-bottom{border-top:1px solid #ffffff14;margin-top:28px;padding-top:20px;display:flex;justify-content:space-between;gap:20px;color:#718098;font-size:10px}.toast{position:fixed;bottom:18px;left:50%;transform:translate(-50%,20px);opacity:0;background:#111a2c;color:white;padding:12px 16px;border-radius:12px;font-size:12px;box-shadow:var(--shadow);transition:.25s;z-index:50;pointer-events:none}.toast.show{opacity:1;transform:translate(-50%,0)}.reveal{opacity:0;transform:translateY(16px);transition:opacity .65s ease,transform .65s ease}.reveal.visible{opacity:1;transform:none}
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr;gap:45px}.hero-copy{max-width:650px}.hero-visual{max-width:650px;width:100%;margin:auto}.problem-grid,.calculator-wrap,.pilot-shell,.faq-grid{grid-template-columns:1fr;gap:25px}.bento{grid-template-columns:repeat(2,1fr)}.feature.large{grid-column:span 2}.logo-inner{align-items:flex-start;flex-direction:column}.logo-label{max-width:none}.nav-links{gap:16px}.calculator-wrap{gap:20px}.pilot-copy{max-width:600px}}
+@media(max-width:600px){.wrap{width:min(100% - 28px,1160px)}.announcement{font-size:10px}.nav-inner{height:66px}.nav-links{display:none}.nav .btn{padding:11px 13px;font-size:11px}.brand{font-size:17px}.hero{padding:53px 0 52px}.hero h1{font-size:43px;letter-spacing:-2.5px}.hero-copy{font-size:14px}.hero-actions .btn{flex:1}.dash{padding:12px;transform:none}.dash-heading strong{font-size:17px}.stat{padding:9px}.stat strong{font-size:16px}.work-head,.work-line{grid-template-columns:1.3fr .6fr .75fr;padding:10px 8px;gap:5px}.work-line{font-size:9px}.tag{font-size:7px;padding:5px}.float-note{right:-3px;bottom:-30px;padding:10px}.hero-visual{margin-bottom:25px}.audience span{font-size:10px}.section{padding:70px 0}.section h2{letter-spacing:-1.4px}.problem-copy{padding:25px}.example-panel{padding:20px}.bento{grid-template-columns:1fr}.feature,.feature.large{grid-column:span 1;min-height:205px}.calculator-wrap{padding:23px 18px;border-radius:22px}.calc-card{padding:18px}.calc-result{font-size:26px}.calc-bottom{align-items:start;flex-direction:column}.calc-bottom .btn{width:100%}.steps{grid-template-columns:1fr;gap:23px}.step{display:grid;grid-template-columns:42px 1fr;column-gap:13px}.step-number{grid-row:span 2;margin:0}.step h3{align-self:end}.pilot-section{padding-bottom:70px}.pilot-shell{padding:22px 14px;border-radius:22px}.form-shell{padding:9px}.tally-frame{height:620px}.footer-main,.footer-bottom{align-items:flex-start;flex-direction:column}.footer-links{flex-wrap:wrap}.faq-grid{gap:30px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
 
-    * {
-      box-sizing: border-box
-    }
+/* Aether-inspired hero treatment adapted for the existing vanilla HTML site */
+.hero.aether-hero{
+  min-height: min(820px, calc(100svh - 86px));
+  padding: clamp(62px,8vw,108px) 0 86px;
+  background:#080f1d;
+  color:#f7fafc;
+  isolation:isolate;
+}
+.hero.aether-hero:before{display:none}
+.aether-canvas{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:-2;opacity:.86}
+.aether-shade{position:absolute;inset:0;z-index:-1;pointer-events:none;background:
+  radial-gradient(ellipse at 73% 42%,rgba(35,219,170,.12),transparent 43%),
+  linear-gradient(100deg,rgba(5,12,25,.92) 0%,rgba(5,12,25,.75) 42%,rgba(5,12,25,.35) 100%),
+  linear-gradient(180deg,rgba(5,12,25,.12),rgba(5,12,25,.55))}
+.hero.aether-hero .hero-grid{z-index:1;gap:clamp(35px,5vw,72px)}
+.hero.aether-hero .eyebrow{color:#bdf9e1;background:rgba(11,26,39,.56);border-color:rgba(184,245,220,.27);backdrop-filter:blur(12px)}
+.hero.aether-hero .hero h1{color:#f8fafc}
+.hero.aether-hero h1{color:#f8fafc;text-shadow:0 5px 36px rgba(0,0,0,.25)}
+.hero.aether-hero h1 em{color:#b9f5dc}
+.hero.aether-hero .hero-copy{color:#c3cddc}
+.hero.aether-hero .micro-proof{color:#b5c0cf}
+.hero.aether-hero .micro-proof b{color:#edf5f4}
+.hero.aether-hero .avatars span{border-color:#101a2b}
+.hero.aether-hero .btn-light{background:rgba(255,255,255,.08);color:#f6fafc;border-color:rgba(255,255,255,.22);backdrop-filter:blur(12px)}
+.hero.aether-hero .btn-dark{background:#b9f5dc;color:#08251d;box-shadow:0 10px 32px rgba(25,214,160,.16)}
+.hero.aether-hero .btn-dark:hover{background:#d3ffe9;box-shadow:0 14px 36px rgba(25,214,160,.25)}
+.hero.aether-hero .dash{box-shadow:0 38px 100px rgba(0,0,0,.42);border-color:rgba(205,232,255,.19)}
+.hero.aether-hero .float-note{box-shadow:0 18px 50px rgba(0,0,0,.3)}
+@media(max-width:900px){
+ .hero.aether-hero{min-height:auto;padding:66px 0 72px}
+ .hero.aether-hero .hero-grid{gap:42px}
+ .aether-shade{background:linear-gradient(180deg,rgba(5,12,25,.72),rgba(5,12,25,.92))}
+}
+@media(prefers-reduced-motion:reduce){.aether-canvas{opacity:.28}}
 
-    html {
-      font-family: "Bricolage Grotesque", system-ui, -apple-system, "Segoe UI", sans-serif;
-      background: var(--paper);
-      color: var(--ink);
-      line-height: 1.55
-    }
-
-    body {
-      margin: 0
-    }
-
-    .wrap {
-      max-width: 1080px;
-      margin: 0 auto;
-      padding: 28px 24px 64px
-    }
-
-    .brand {
-      font-weight: 800;
-      font-size: 1.15rem;
-      letter-spacing: -.01em
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: 1.15fr .85fr;
-      gap: 48px;
-      margin-top: 48px;
-      align-items: start
-    }
-
-    h1 {
-      font-size: clamp(2.2rem, 5vw, 3.6rem);
-      line-height: 1.04;
-      letter-spacing: -.025em;
-      font-weight: 800;
-      margin: 0 0 18px;
-      max-width: 14em
-    }
-
-    .lede {
-      font-size: 1.1rem;
-      color: var(--muted);
-      max-width: 34em;
-      margin: 0 0 32px
-    }
-
-    .ledger {
-      background: var(--white);
-      border: 1px solid var(--line);
-      border-radius: 6px;
-      max-width: 34em
-    }
-
-    .ledger-head {
-      display: flex;
-      justify-content: space-between;
-      padding: 10px 16px;
-      border-bottom: 1px solid var(--line);
-      font-size: .85rem;
-      color: var(--muted)
-    }
-
-    .row {
-      display: flex;
-      justify-content: space-between;
-      gap: 16px;
-      padding: 12px 16px;
-      border-bottom: 1px solid var(--line);
-      font-size: .95rem
-    }
-
-    .row:last-child {
-      border-bottom: 0
-    }
-
-    .row small {
-      display: block;
-      color: var(--muted);
-      font-size: .82rem
-    }
-
-    .row b {
-      white-space: nowrap;
-      font-weight: 600
-    }
-
-    .ok b {
-      color: var(--billed)
-    }
-
-    .leak {
-      background: var(--leak-bg);
-      box-shadow: inset 4px 0 0 var(--leak)
-    }
-
-    .leak b {
-      color: var(--leak)
-    }
-
-    .points {
-      margin: 28px 0 0;
-      padding: 0;
-      list-style: none;
-      max-width: 34em
-    }
-
-    .points li {
-      padding: 10px 0;
-      border-top: 1px solid var(--line)
-    }
-
-    .points strong {
-      font-weight: 600
-    }
-
-    form {
-      background: var(--white);
-      border: 1px solid var(--line);
-      border-radius: 6px;
-      padding: 24px;
-      position: sticky;
-      top: 24px
-    }
-
-    form h2 {
-      font-size: 1.3rem;
-      margin: 0 0 6px;
-      letter-spacing: -.01em
-    }
-
-    form p.sub {
-      margin: 0 0 18px;
-      color: var(--muted);
-      font-size: .95rem
-    }
-
-    .lead-card {
-      background: var(--white);
-      border: 1px solid var(--line);
-      border-radius: 6px;
-      padding: 24px;
-      position: sticky;
-      top: 24px;
-      min-width: 0
-    }
-
-    .lead-card h2 {
-      font-size: 1.3rem;
-      margin: 0 0 6px;
-      letter-spacing: -.01em
-    }
-
-    .lead-card p.sub {
-      margin: 0 0 18px;
-      color: var(--muted);
-      font-size: .95rem
-    }
-
-    .lead-card iframe {
-      display: block;
-      width: 100%;
-      max-width: 100%;
-      border: 0;
-      background: transparent
-    }
-
-    label {
-      display: block;
-      font-size: .88rem;
-      font-weight: 600;
-      margin: 14px 0 5px
-    }
-
-    input[type=text],
-    input[type=email],
-    textarea {
-      width: 100%;
-      font: inherit;
-      padding: 10px 12px;
-      border: 1px solid #9AA4B0;
-      border-radius: 4px;
-      background: var(--white);
-      color: var(--ink)
-    }
-
-    textarea {
-      min-height: 90px;
-      resize: vertical
-    }
-
-    :focus-visible {
-      outline: 3px solid #2F4BFF;
-      outline-offset: 2px
-    }
-
-    button {
-      margin-top: 20px;
-      width: 100%;
-      font: inherit;
-      font-weight: 600;
-      padding: 13px 16px;
-      border: 0;
-      border-radius: 4px;
-      background: var(--ink);
-      color: var(--white);
-      cursor: pointer
-    }
-
-    button:hover {
-      background: #2A3646
-    }
-
-    button:disabled {
-      opacity: .6;
-      cursor: wait
-    }
-
-    .msg {
-      margin-top: 14px;
-      font-size: .95rem
-    }
-
-    .msg.good {
-      color: var(--billed)
-    }
-
-    .msg.bad {
-      color: var(--leak)
-    }
-
-    footer {
-      margin-top: 56px;
-      color: var(--muted);
-      font-size: .85rem
-    }
-
-    .calc {
-      margin-top: 28px;
-      max-width: 34em;
-      background: var(--ink);
-      color: var(--white);
-      border-radius: 6px;
-      padding: 22px
-    }
-
-    .calc h2 {
-      margin: 0 0 4px;
-      font-size: 1.2rem;
-      letter-spacing: -.01em
-    }
-
-    .calc .hint {
-      margin: 0 0 16px;
-      color: #B8C2CF;
-      font-size: .9rem
-    }
-
-    .calc label {
-      color: var(--white);
-      margin-top: 12px
-    }
-
-    .calc input[type=range] {
-      width: 100%;
-      accent-color: #FF8A4C
-    }
-
-    .calc .rate-row {
-      display: flex;
-      gap: 8px
-    }
-
-    .calc select,
-    .calc input[type=number] {
-      font: inherit;
-      padding: 9px 10px;
-      border: 1px solid #9AA4B0;
-      border-radius: 4px;
-      background: var(--white);
-      color: var(--ink)
-    }
-
-    .calc input[type=number] {
-      flex: 1;
-      min-width: 0
-    }
-
-    .result {
-      margin-top: 18px;
-      padding-top: 16px;
-      border-top: 1px solid #3A4656
-    }
-
-    .result .big {
-      display: block;
-      font-size: 2.4rem;
-      font-weight: 800;
-      letter-spacing: -.02em;
-      color: #FF8A4C;
-      line-height: 1.1
-    }
-
-    .result small {
-      display: block;
-      color: #B8C2CF;
-      margin-top: 4px;
-      font-size: .85rem
-    }
-
-    .btn {
-      display: inline-block;
-      margin-top: 16px;
-      padding: 12px 18px;
-      border-radius: 4px;
-      background: #FF8A4C;
-      color: var(--ink);
-      font-weight: 600;
-      text-decoration: none
-    }
-
-    .btn:hover {
-      background: #FF9E6A
-    }
-
-    .note {
-      margin: 10px 0 0;
-      color: var(--muted);
-      font-size: .85rem
-    }
-
-    .sticky-cta {
-      display: none
-    }
-
-    @media (prefers-reduced-motion:no-preference) {
-      html {
-        scroll-behavior: smooth
-      }
-    }
-
-    @media (max-width:820px) {
-      .grid {
-        grid-template-columns: 1fr;
-        gap: 36px
-      }
-
-      form,
-      .lead-card {
-        position: static
-      }
-
-      .wrap {
-        padding-bottom: 96px
-      }
-
-      .sticky-cta {
-        display: block;
-        position: fixed;
-        left: 16px;
-        right: 16px;
-        bottom: 16px;
-        padding: 14px;
-        border-radius: 6px;
-        background: var(--ink);
-        color: var(--white);
-        text-align: center;
-        font-weight: 600;
-        text-decoration: none;
-        box-shadow: 0 4px 16px rgba(0, 0, 0, .25)
-      }
-    }
-  </style>
+</style>
 </head>
-
 <body>
-  <div class="wrap">
-    <div class="brand">ScopeWallet</div>
-
-    <div class="grid">
-      <main>
-        <h1>Find the work you did but never billed.</h1>
-        <p class="lede">ScopeWallet checks your team's activity in Slack, Jira, GitHub and email against the signed
-          contract. It flags unbilled and out-of-scope work while you can still raise a change order.</p>
-
-        <div class="ledger" aria-label="Example of flagged work">
-          <div class="ledger-head"><span>Example: Project Atlas</span><span>Checked against contract</span></div>
-          <div class="row ok"><span>Homepage redesign<small>In scope</small></span><b>Billed</b></div>
-          <div class="row leak"><span>Three extra revision rounds<small>Not in contract</small></span><b>Not billed</b>
-          </div>
-          <div class="row leak"><span>Staging environment setup<small>Not in contract</small></span><b>Not billed</b>
-          </div>
-        </div>
-
-        <section class="calc" aria-label="Unbilled work estimate">
-          <h2>How much could your team be leaking?</h2>
-          <p class="hint">Use your own numbers. This is a rough estimate, not a measurement.</p>
-
-          <label for="hrs">Unbilled hours per week: <span id="hrs-out">8</span></label>
-          <input id="hrs" type="range" min="1" max="40" value="8">
-
-          <label for="rate">Your billing rate per hour</label>
-          <div class="rate-row">
-            <select id="cur" aria-label="Currency">
-              <option>$</option>
-              <option>₹</option>
-            </select>
-            <input id="rate" type="number" min="1" value="40" inputmode="numeric">
-          </div>
-
-          <div class="result">
-            <span class="big" id="calc-out">$15,360</span>
-            <small>per year (hours × rate × 48 working weeks)</small>
-          </div>
-          <a class="btn" id="calc-cta" href="#lead-form">Find where mine leaks</a>
-        </section>
-
-        <ul class="points">
-          <li><strong>Reads the contract.</strong> Scope comes from your signed agreement, not from memory.</li>
-          <li><strong>Watches the work.</strong> Activity across your team's tools is matched to what was agreed.</li>
-          <li><strong>Flags the gap.</strong> You see unbilled work before the invoice goes out.</li>
-        </ul>
-      </main>
-
-      <section id="lead-form" class="lead-card" aria-labelledby="lead-heading">
-        <h2 id="lead-heading">Request pilot access</h2>
-        <p class="sub">Free 30-day pilot for the first few agencies.</p>
-
-        <!--
-          SETUP: Replace YOUR_FORM_ID with the ID from your published Tally form.
-          In Tally, use Share → Embed and copy its exact URL if it differs.
-        -->
-        <iframe id="tally-form" src="https://tally.so/embed/OQ1oE7?hideTitle=1&transparentBackground=1"
-          title="ScopeWallet pilot request form" width="100%" height="650" frameborder="0" marginheight="0"
-          marginwidth="0" loading="lazy"></iframe>
-
-        <p class="note">Submit your details and we'll follow up by email.</p>
-      </section>
-    </div>
-
-    <footer>ScopeWallet</footer>
-    <a class="sticky-cta" href="#lead-form">Request pilot access</a>
+<div class="announcement"><strong>EARLY ACCESS</strong> &nbsp; A free 30-day pilot for a small group of service agencies &nbsp; <span aria-hidden="true">↗</span></div>
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#top" aria-label="ScopeWallet home"><span class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 7.5 12 3l8 4.5v9L12 21l-8-4.5z"/><path d="m8 12 2.5 2.5L16.5 8.5"/></svg></span>ScopeWallet</a>
+    <nav class="nav-links" aria-label="Main navigation"><a href="#how-it-works">How it works</a><a href="#features">Platform</a><a href="#calculator">Leakage calculator</a><a href="#faq">FAQ</a></nav>
+    <a class="btn btn-dark" href="#pilot">Request pilot <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
   </div>
+</header>
+<main id="top">
+<section class="hero aether-hero" aria-label="ScopeWallet revenue assurance introduction">
+ <canvas class="aether-canvas" id="aetherCanvas" aria-hidden="true"></canvas>
+ <div class="aether-shade" aria-hidden="true"></div>
+ <div class="hero-glow"></div>
+ <div class="wrap hero-grid">
+  <div class="reveal">
+   <div class="eyebrow"><span class="pulse"></span> Revenue assurance for service teams</div>
+   <h1>Your team did the work.<br>Did you <em>bill for it?</em></h1>
+   <p class="hero-copy">ScopeWallet helps agencies spot potential unbilled work and scope creep by comparing project activity with what the client actually agreed to.</p>
+   <div class="hero-actions"><a class="btn btn-dark" href="#pilot">Get early access <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a><a class="btn btn-light" href="#how-it-works">Explore how it works <span aria-hidden="true">↓</span></a></div>
+   <div class="micro-proof"><div class="avatars"><span>Ag</span><span>St</span><span>Op</span></div><span>Designed for <b>agencies, studios &amp; consultancies</b></span></div>
+  </div>
+  <div class="hero-visual reveal">
+   <div class="dash">
+    <div class="dash-top"><div class="dash-brand"><span class="tiny-mark">S</span> Scope review <span style="color:#8d9bb1;font-weight:400">/ Project Atlas</span></div><span class="dash-project">DEMO DATA</span></div>
+    <div class="dash-heading"><div><span>Potential billing gaps</span><strong>Project activity review</strong></div><span class="status-pill">● Review ready</span></div>
+    <div class="stat-row">
+     <div class="stat"><label>Items reviewed</label><strong>24</strong><small>Across project activity</small></div>
+     <div class="stat"><label>Need a look</label><strong>03</strong><small>Potential scope gaps</small></div>
+     <div class="stat"><label>Next step</label><strong style="font-size:15px">Verify</strong><small>Before invoicing</small></div>
+    </div>
+    <div class="work-card">
+     <div class="work-head"><span>Work item</span><span>Contract match</span><span>Status</span></div>
+     <div class="work-line"><span>Homepage redesign</span><span>In scope</span><span class="tag ok">Matched</span></div>
+     <div class="work-line"><span>Extra revision rounds</span><span>Needs review</span><span class="tag warn">Review</span></div>
+     <div class="work-line"><span>Staging setup</span><span>Needs review</span><span class="tag review">Review</span></div>
+    </div>
+    <div class="dash-foot"><span>Illustrative workflow · not customer data</span><b>Review before invoice ↗</b></div>
+   </div>
+   <div class="float-note"><span class="float-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v18M3 12h18"/><circle cx="12" cy="12" r="9"/></svg></span><div><b>Potential scope gap detected</b><small>Verify against signed agreement</small></div></div>
+  </div>
+ </div>
+</section>
+<section class="logo-strip"><div class="wrap logo-inner"><div class="logo-label">Built for teams where work moves fast</div><div class="audience"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M8 8h8M8 12h8M8 16h4"/></svg>Digital agencies</span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 20V8l8-4 8 4v12"/><path d="M9 20v-6h6v6M8 9h.01M16 9h.01"/></svg>Consultancies</span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 20h18M5 20V9l7-5 7 5v11M9 12h6M9 16h6"/></svg>Development studios</span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>Professional services</span></div></div></section>
+<section class="section" id="problem"><div class="wrap">
+ <div class="section-head reveal"><div class="kicker">The quiet revenue gap</div><h2>Scope creep rarely arrives as one big event.</h2><p>It shows up as one extra revision, a “quick” implementation, or a setup task nobody remembered to add to the invoice. ScopeWallet is designed to help you notice those moments.</p></div>
+ <div class="problem-grid">
+  <div class="problem-copy reveal"><div class="kicker">Why it matters</div><h3>The work is done. The commercial conversation never happened.</h3><p>When project activity and contract terms live in different places, it's easy for extra work to slip through unnoticed.</p><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 4 4L19 6"/></svg>Work requests are scattered across tools and conversations.</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 4 4L19 6"/></svg>Teams discover scope changes when it's too late to discuss them.</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 4 4L19 6"/></svg>Invoices rely on what someone remembers to include.</li></ul></div>
+  <div class="example-panel reveal"><div class="panel-top"><strong>Example project review</strong><span>Illustrative data</span></div>
+   <div class="example-row"><div class="row-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 5h16v14H4zM8 9h8M8 13h5"/></svg></div><div><b>Homepage redesign</b><small>Included in signed agreement</small></div><span class="tag ok">In scope</span></div>
+   <div class="example-row"><div class="row-icon" style="background:#fff5df;color:#a16a05"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3 2.8 20h18.4L12 3z"/><path d="M12 9v5m0 3h.01"/></svg></div><div><b>Three extra revision rounds</b><small>Compare with revision limits</small></div><span class="tag warn">Review</span></div>
+   <div class="example-row"><div class="row-icon" style="background:#eef0ff;color:#626cc4"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 4v5"/></svg></div><div><b>Staging environment setup</b><small>Check whether setup was included</small></div><span class="tag review">Review</span></div>
+  </div>
+ </div>
+</div></section>
+<section class="section" id="features" style="padding-top:25px"><div class="wrap">
+ <div class="section-head reveal"><div class="kicker">One clearer workflow</div><h2>Know what to check before the invoice goes out.</h2><p>Bring the agreement and the work closer together. Keep people in control of the final decision.</p></div>
+ <div class="bento">
+  <article class="feature large reveal"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 13h7M9 17h5"/></svg></div><h3>Start with the signed agreement</h3><p>Use contract terms, deliverables, revision limits and exclusions as the reference point for reviewing work—not memory or assumptions.</p><div class="feature-graphic"><span class="flow-step">Signed agreement <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span><span class="flow-step">Scope reference</span></div></article>
+  <article class="feature dark reveal"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><h3>Review activity in context</h3><p>Connect the dots between project work and agreed deliverables, with human review for uncertain matches.</p><div class="feature-graphic"><span class="flow-step" style="background:#ffffff0b;border-color:#ffffff1b;color:#c4d2e6">Activity → review</span></div></article>
+  <article class="feature reveal"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 5h16v14H4z"/><path d="M8 9h8M8 13h5"/><path d="m15 16 2 2 4-4"/></svg></div><h3>Flag potential gaps</h3><p>Give your team a shortlist of work items that may need a billing or scope conversation.</p><div class="feature-graphic"><span class="tag warn">Needs review</span></div></article>
+  <article class="feature reveal"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19V5m0 14h17"/><path d="m7 15 4-4 3 2 6-7"/></svg></div><h3>Protect project margins</h3><p>Spot patterns in missed scope discussions and make commercial reviews part of your delivery rhythm.</p><div class="feature-graphic" style="gap:4px;align-items:end"><i class="mini-bar" style="height:16px"></i><i class="mini-bar" style="height:27px"></i><i class="mini-bar" style="height:21px"></i><i class="mini-bar" style="height:37px"></i><i class="mini-bar" style="height:30px"></i></div></article>
+  <article class="feature reveal"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3 4 6v5c0 5 3.4 8.3 8 10 4.6-1.7 8-5 8-10V6z"/><path d="m9 12 2 2 4-4"/></svg></div><h3>Keep humans in control</h3><p>Potential gaps are prompts to verify—not automatic accusations, invoice changes, or client messages.</p><div class="feature-graphic"><span class="tag ok">Human verified</span></div></article>
+ </div>
+</div></section>
+<section class="section" id="calculator" style="padding-top:20px"><div class="wrap">
+ <div class="calculator-wrap reveal">
+  <div class="calc-copy"><div class="kicker">The quick estimate</div><h2>What could unbilled time add up to?</h2><p>Try your own assumptions to estimate the annual value of hours that may not be billed. Use it as a conversation starter, not a prediction of actual losses.</p><p class="calc-disclaimer">Illustrative estimate only. It does not measure your team's actual leakage or guarantee recoverable revenue.</p></div>
+  <div class="calc-card">
+   <div class="field"><div class="field-top"><label for="hours">Potential unbilled hours per week</label><output id="hoursOut" for="hours">8 hrs</output></div><input class="range" id="hours" type="range" min="1" max="40" value="8"><div class="range-scale"><span>1 hour</span><span>40 hours</span></div></div>
+   <div class="field"><div class="field-top"><label for="rate">Billable rate per hour</label><output id="rateOut" for="rate">$80</output></div><input class="range" id="rate" type="range" min="15" max="300" step="5" value="80"><div class="range-scale"><span id="rateMin">$15</span><span id="rateMax">$300</span></div></div>
+   <div class="field"><div class="field-top"><label for="currency">Currency</label><select id="currency" style="border:1px solid #e4e7ec;border-radius:8px;padding:8px 10px;background:white;font-size:11px"><option value="USD">USD · $</option><option value="INR">INR · ₹</option><option value="GBP">GBP · £</option><option value="EUR">EUR · €</option></select></div></div>
+   <div class="calc-bottom"><div><small>Illustrative annual value · 48 working weeks</small><div class="calc-result" id="result" aria-live="polite">$30,720</div></div><a class="btn btn-dark" id="calcCta" href="#pilot">Review my workflow <span aria-hidden="true">↗</span></a></div>
+  </div>
+ </div>
+</div></section>
+<section class="section" id="how-it-works"><div class="wrap">
+ <div class="section-head reveal"><div class="kicker">How it works</div><h2>From agreement to a more informed invoice.</h2><p>A simple review loop designed to fit around the tools and decisions your team already uses.</p></div>
+ <div class="steps">
+  <div class="step reveal"><div class="step-number">01</div><h3>Bring in the scope</h3><p>Start with the signed contract, deliverables, included revisions and agreed exclusions.</p></div>
+  <div class="step reveal"><div class="step-number">02</div><h3>Compare work to scope</h3><p>Review project activity against the agreement and surface items that may need attention.</p></div>
+  <div class="step reveal"><div class="step-number">03</div><h3>Decide before billing</h3><p>Verify the context, then decide whether to bill, raise a change order, or mark the work as included.</p></div>
+ </div>
+</div></section>
+<section class="pilot-section" id="pilot"><div class="wrap"><div class="pilot-shell reveal">
+ <div class="pilot-copy"><div class="kicker">Early access · 30-day pilot</div><h2>Make your next invoice a little less guesswork.</h2><p>We're inviting a small group of agencies and service teams to help shape ScopeWallet. Tell us a little about your workflow and we'll follow up by email.</p><div class="pilot-benefits"><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 4 4L19 6"/></svg>Free 30-day pilot for selected early teams</div><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 4 4L19 6"/></svg>Share your current billing and scope workflow</div><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 4 4L19 6"/></svg>No commitment to purchase</div></div></div>
+ <div class="form-shell"><div class="form-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 7 8 6 8-6"/></svg>Complete the short form. We'll contact you at the email you provide.</div><iframe class="tally-frame" src="https://tally.so/embed/OQ1oE7?hideTitle=1&transparentBackground=1" title="ScopeWallet pilot request form" loading="lazy" allow="clipboard-write" frameborder="0" marginheight="0" marginwidth="0"></iframe></div>
+</div></div></section>
+<section class="section" id="faq" style="padding-top:15px"><div class="wrap faq-grid"><div class="section-head reveal"><div class="kicker">A few clarifications</div><h2>Good questions, straight answers.</h2><p>ScopeWallet is being shaped with early users. Here's what to know about the pilot.</p></div><div class="faq-list reveal">
+ <details><summary>Does ScopeWallet automatically decide that work is out of scope?</summary><p>No. A mismatch is a prompt for review. Your team should check the contract, project context and client agreement before deciding whether work is billable or requires a change order.</p></details>
+ <details><summary>Is the product fully integrated with Slack, Jira, GitHub and email today?</summary><p>The product vision includes comparing activity from project tools with contract scope. The pilot will validate the workflow and integration requirements; this page does not claim that every integration is already live.</p></details>
+ <details><summary>What happens after I request pilot access?</summary><p>Your details are submitted through the embedded Tally form. Once notifications are configured in Tally, the ScopeWallet team can follow up using the email address you provide.</p></details>
+ <details><summary>Is the annual calculator a guarantee of savings?</summary><p>No. It's a simple estimate based on the hours and rate you enter, multiplied by 48 working weeks. Actual missed billable work can be lower, higher, or zero.</p></details>
+</div></div></section>
+</main>
+<footer class="footer"><div class="wrap"><div class="footer-main"><div><a class="brand" href="#top"><span class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 7.5 12 3l8 4.5v9L12 21l-8-4.5z"/><path d="m8 12 2.5 2.5L16.5 8.5"/></svg></span>ScopeWallet</a><p>Make the work you deliver easier to account for.</p></div><div class="footer-links"><a href="#features">Platform</a><a href="#calculator">Calculator</a><a href="#pilot">Request pilot</a><a href="#faq">FAQ</a></div></div><div class="footer-bottom"><span>© <span id="year"></span> ScopeWallet. All rights reserved.</span><span>Built for clearer scope and billing conversations.</span></div></div></footer>
+<div class="toast" id="toast" role="status">Your estimate is ready.</div>
 
-  <script>
-    (function () {
-      var hrs = document.getElementById("hrs");
-      var rate = document.getElementById("rate");
-      var cur = document.getElementById("cur");
-      var hrsOut = document.getElementById("hrs-out");
-      var calcOut = document.getElementById("calc-out");
-      var calcCta = document.getElementById("calc-cta");
+<script>
+/* Lightweight WebGL2 Aether background. Falls back gracefully when WebGL2 is unavailable. */
+(() => {
+  const canvas = document.getElementById('aetherCanvas');
+  if (!canvas) return;
+  const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const gl = canvas.getContext('webgl2', { alpha: true, antialias: false, powerPreference: 'low-power' });
+  if (!gl) {
+    canvas.style.background = 'radial-gradient(ellipse at 70% 45%, #174f4c 0%, #102239 38%, #080f1d 76%)';
+    return;
+  }
 
-      function fmt(n) {
-        return Math.round(n).toLocaleString(
-          cur.value === "₹" ? "en-IN" : "en-US"
-        );
-      }
+  const vertexSource = `#version 300 es
+  in vec2 position;
+  void main(){ gl_Position = vec4(position, 0.0, 1.0); }`;
 
-      function calc() {
-        var h = Number(hrs.value) || 0;
-        var r = Number(rate.value) || 0;
-        var yearly = h * r * 48;
+  const fragmentSource = `#version 300 es
+  precision highp float;
+  out vec4 O;
+  uniform float time;
+  uniform vec2 resolution;
+  #define FC gl_FragCoord.xy
+  #define R resolution
+  #define T time
+  #define S smoothstep
+  #define MN min(R.x,R.y)
 
-        hrsOut.textContent = h;
-        calcOut.textContent = cur.value + fmt(yearly);
-      }
+  float pattern(vec2 uv) {
+    float d = 0.0;
+    for (float i = 0.0; i < 3.0; i++) {
+      uv.x += sin(T * (0.45 + i * 0.16) + uv.y * 1.5 + i) * (0.13 + i * 0.025);
+      d += 0.0035 / max(abs(uv.x), 0.002);
+    }
+    return d;
+  }
+  vec3 scene(vec2 uv) {
+    vec3 col = vec3(0.0);
+    uv = vec2(atan(uv.x, uv.y) * 0.3183, -log(max(length(uv), 0.001)) + T * 0.11);
+    for (float i = 0.0; i < 3.0; i++) {
+      int k = int(mod(i, 3.0));
+      col[k] += pattern(uv + i * 6.0 / MN);
+    }
+    return col;
+  }
+  void main() {
+    vec2 uv = (FC - 0.5 * R) / MN;
+    vec3 col = vec3(0.0);
+    float s = 12.0, e = 0.00045;
+    col += e / max(abs(sin(uv.x*s) * cos(uv.y*s)), 0.012);
+    uv.y += R.x > R.y ? 0.5 : 0.5 * (R.y / R.x);
+    col += scene(uv);
+    col = vec3(col.r * 0.32 + col.b * 0.04, col.g * 0.62 + col.r * 0.08, col.b * 0.78 + col.g * 0.25);
+    col *= vec3(0.58, 1.0, 0.82);
+    float vignette = 1.0 - smoothstep(0.15, 1.25, length((FC - 0.5*R)/R.y));
+    vec3 base = vec3(0.025, 0.055, 0.10);
+    vec3 finalColor = base + col * 0.14 * vignette;
+    O = vec4(finalColor, 0.86);
+  }`;
 
-      hrs.addEventListener("input", calc);
-      rate.addEventListener("input", calc);
-      cur.addEventListener("change", calc);
+  function compile(type, source) {
+    const shader = gl.createShader(type);
+    gl.shaderSource(shader, source);
+    gl.compileShader(shader);
+    if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+      console.warn('Aether shader compile issue:', gl.getShaderInfoLog(shader));
+      gl.deleteShader(shader);
+      return null;
+    }
+    return shader;
+  }
+  const vs = compile(gl.VERTEX_SHADER, vertexSource);
+  const fs = compile(gl.FRAGMENT_SHADER, fragmentSource);
+  if (!vs || !fs) {
+    canvas.style.background = 'radial-gradient(ellipse at 70% 45%, #174f4c 0%, #102239 38%, #080f1d 76%)';
+    return;
+  }
+  const program = gl.createProgram();
+  gl.attachShader(program, vs);
+  gl.attachShader(program, fs);
+  gl.linkProgram(program);
+  if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+    console.warn('Aether shader link issue:', gl.getProgramInfoLog(program));
+    canvas.style.background = 'radial-gradient(ellipse at 70% 45%, #174f4c 0%, #102239 38%, #080f1d 76%)';
+    return;
+  }
 
-      calcCta.addEventListener("click", function () {
-        var frame = document.getElementById("tally-form");
-        if (frame) {
-          frame.setAttribute("title", "ScopeWallet pilot request form");
-        }
-      });
+  const buffer = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,1,-1,-1,1,1,1,-1]), gl.STATIC_DRAW);
+  gl.useProgram(program);
+  const position = gl.getAttribLocation(program, 'position');
+  gl.enableVertexAttribArray(position);
+  gl.vertexAttribPointer(position, 2, gl.FLOAT, false, 0, 0);
+  const timeLocation = gl.getUniformLocation(program, 'time');
+  const resolutionLocation = gl.getUniformLocation(program, 'resolution');
+  gl.clearColor(0.02, 0.04, 0.08, 0.0);
 
-      calc();
-    })();
-  </script>
+  let raf = 0, start = performance.now(), lastFrame = 0;
+  function resize() {
+    const rect = canvas.getBoundingClientRect();
+    const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+    const width = Math.max(1, Math.floor(rect.width * dpr));
+    const height = Math.max(1, Math.floor(rect.height * dpr));
+    if (canvas.width !== width || canvas.height !== height) {
+      canvas.width = width; canvas.height = height;
+    }
+    gl.viewport(0, 0, canvas.width, canvas.height);
+  }
+  const observer = new ResizeObserver(resize);
+  observer.observe(canvas);
+  window.addEventListener('resize', resize, { passive: true });
+  resize();
+
+  function draw(now) {
+    if (reduceMotion && now - lastFrame < 1000) {
+      raf = requestAnimationFrame(draw);
+      return;
+    }
+    lastFrame = now;
+    gl.clear(gl.COLOR_BUFFER_BIT);
+    gl.useProgram(program);
+    gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+    gl.uniform2f(resolutionLocation, canvas.width, canvas.height);
+    gl.uniform1f(timeLocation, reduceMotion ? 0.35 : (now - start) * 0.00016);
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    if (!reduceMotion) raf = requestAnimationFrame(draw);
+  }
+  draw(performance.now());
+  if (reduceMotion) {
+    window.addEventListener('visibilitychange', () => {
+      if (!document.hidden) draw(performance.now());
+    });
+  }
+  window.addEventListener('pagehide', () => {
+    cancelAnimationFrame(raf);
+    observer.disconnect();
+    gl.deleteBuffer(buffer);
+    gl.deleteProgram(program);
+  }, { once: true });
+})();
+</script>
+
+<script>
+(() => {
+ const hours = document.getElementById('hours');
+ const rate = document.getElementById('rate');
+ const currency = document.getElementById('currency');
+ const hoursOut = document.getElementById('hoursOut');
+ const rateOut = document.getElementById('rateOut');
+ const result = document.getElementById('result');
+ const symbols = {USD:'$',INR:'₹',GBP:'£',EUR:'€'};
+ const format = n => new Intl.NumberFormat(currency.value === 'INR' ? 'en-IN' : 'en-US',{maximumFractionDigits:0}).format(n);
+ function update(){
+   const symbol = symbols[currency.value] || '$';
+   const h = Number(hours.value), r = Number(rate.value);
+   hoursOut.textContent = `${h} ${h===1?'hr':'hrs'}`;
+   rateOut.textContent = `${symbol}${format(r)}`;
+   document.getElementById('rateMin').textContent = `${symbol}${format(15)}`;
+   document.getElementById('rateMax').textContent = `${symbol}${format(300)}`;
+   result.textContent = `${symbol}${format(h*r*48)}`;
+ }
+ [hours,rate,currency].forEach(el=>el.addEventListener('input',update));
+ update();
+ document.getElementById('year').textContent = new Date().getFullYear();
+ const observer = new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target)}}),{threshold:.12});
+ document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+ document.querySelectorAll('a[href="#pilot"]').forEach(link=>link.addEventListener('click',()=>{const toast=document.getElementById('toast');toast.textContent='Pilot request form is just below.';toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),1800)}));
+})();
+</script>
 </body>
-
 </html>
