@@ -165,6 +165,36 @@
       font-size: .95rem
     }
 
+    .lead-card {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 24px;
+      position: sticky;
+      top: 24px;
+      min-width: 0
+    }
+
+    .lead-card h2 {
+      font-size: 1.3rem;
+      margin: 0 0 6px;
+      letter-spacing: -.01em
+    }
+
+    .lead-card p.sub {
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: .95rem
+    }
+
+    .lead-card iframe {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      border: 0;
+      background: transparent
+    }
+
     label {
       display: block;
       font-size: .88rem;
@@ -345,7 +375,8 @@
         gap: 36px
       }
 
-      form {
+      form,
+      .lead-card {
         position: static
       }
 
@@ -421,33 +452,20 @@
         </ul>
       </main>
 
-      <form id="lead-form" action="https://api.web3forms.com/submit" method="POST">
-        <!-- PASTE YOUR WEB3FORMS ACCESS KEY ON THE NEXT LINE. This is the only place. -->
-        <input type="hidden" name="access_key" value="b2ad26b3-7ec0-4da6-9b9c-2c489497c4a4">
-        <input type="hidden" name="subject" value="New ScopeWallet lead">
-        <input type="hidden" name="from_name" value="ScopeWallet landing page">
-        <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
-        <input type="hidden" name="leak_estimate" id="leak-estimate" value="">
-
-        <h2>Request pilot access</h2>
+      <section id="lead-form" class="lead-card" aria-labelledby="lead-heading">
+        <h2 id="lead-heading">Request pilot access</h2>
         <p class="sub">Free 30-day pilot for the first few agencies.</p>
 
-        <label for="name">Your name</label>
-        <input id="name" type="text" name="name" required autocomplete="name">
+        <!--
+          SETUP: Replace YOUR_FORM_ID with the ID from your published Tally form.
+          In Tally, use Share → Embed and copy its exact URL if it differs.
+        -->
+        <iframe id="tally-form" src="https://tally.so/embed/OQ1oE7?hideTitle=1&transparentBackground=1"
+          title="ScopeWallet pilot request form" width="100%" height="650" frameborder="0" marginheight="0"
+          marginwidth="0" loading="lazy"></iframe>
 
-        <label for="email">Work email</label>
-        <input id="email" type="email" name="email" required autocomplete="email">
-
-        <label for="company">Agency or company</label>
-        <input id="company" type="text" name="company" autocomplete="organization">
-
-        <label for="message">What is your biggest billing or scope headache?</label>
-        <textarea id="message" name="message"></textarea>
-
-        <button type="submit" id="submit-btn">Request pilot access</button>
-        <p class="note">Only name and email are required. Takes about 30 seconds. No payment details.</p>
-        <div class="msg" id="form-msg" role="status" aria-live="polite"></div>
-      </form>
+        <p class="note">Submit your details and we'll follow up by email.</p>
+      </section>
     </div>
 
     <footer>ScopeWallet</footer>
@@ -456,63 +474,40 @@
 
   <script>
     (function () {
-      var form = document.getElementById("lead-form");
-      var btn = document.getElementById("submit-btn");
-      var msg = document.getElementById("form-msg");
-
       var hrs = document.getElementById("hrs");
       var rate = document.getElementById("rate");
       var cur = document.getElementById("cur");
       var hrsOut = document.getElementById("hrs-out");
       var calcOut = document.getElementById("calc-out");
-      var est = document.getElementById("leak-estimate");
-      var message = document.getElementById("message");
-      var summary = "";
+      var calcCta = document.getElementById("calc-cta");
 
-      function fmt(n) { return Math.round(n).toLocaleString(cur.value === "\u20B9" ? "en-IN" : "en-US"); }
+      function fmt(n) {
+        return Math.round(n).toLocaleString(
+          cur.value === "₹" ? "en-IN" : "en-US"
+        );
+      }
+
       function calc() {
         var h = Number(hrs.value) || 0;
         var r = Number(rate.value) || 0;
         var yearly = h * r * 48;
+
         hrsOut.textContent = h;
         calcOut.textContent = cur.value + fmt(yearly);
-        summary = h + " unbilled hours per week at " + cur.value + r + " per hour, about " + cur.value + fmt(yearly) + " per year (my own estimate)";
-        est.value = summary;
       }
+
       hrs.addEventListener("input", calc);
       rate.addEventListener("input", calc);
       cur.addEventListener("change", calc);
-      calc();
 
-      document.getElementById("calc-cta").addEventListener("click", function () {
-        if (!message.value.trim()) { message.value = "My estimate: " + summary + "."; }
-        setTimeout(function () { document.getElementById("name").focus({ preventScroll: true }); }, 400);
+      calcCta.addEventListener("click", function () {
+        var frame = document.getElementById("tally-form");
+        if (frame) {
+          frame.setAttribute("title", "ScopeWallet pilot request form");
+        }
       });
-      form.addEventListener("submit", function (e) {
-        e.preventDefault();
-        btn.disabled = true;
-        btn.textContent = "Sending";
-        msg.className = "msg";
-        msg.textContent = "";
-        fetch(form.action, { method: "POST", headers: { "Accept": "application/json" }, body: new FormData(form) })
-          .then(function (r) { return r.json(); })
-          .then(function (d) {
-            if (d.success) {
-              form.reset();
-              msg.className = "msg good";
-              msg.textContent = "Request sent. You will get a personal reply by email.";
-              btn.textContent = "Sent";
-            } else {
-              throw new Error("failed");
-            }
-          })
-          .catch(function () {
-            msg.className = "msg bad";
-            msg.textContent = "The request did not send. Check your connection and try again.";
-            btn.disabled = false;
-            btn.textContent = "Request pilot access";
-          });
-      });
+
+      calc();
     })();
   </script>
 </body>
