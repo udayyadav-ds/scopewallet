@@ -1,0 +1,82 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Tenancy rule: every business table carries orgId, and every query filters on it.
+model Organization {
+  id        Int             @id @default(autoincrement())
+  name      String
+  createdAt DateTime        @default(now())
+  users     User[]
+  clients   Client[]
+  projects  Project[]
+  requests  ClientRequest[]
+}
+
+model User {
+  id           Int          @id @default(autoincrement())
+  email        String       @unique
+  name         String
+  passwordHash String
+  orgId        Int
+  org          Organization @relation(fields: [orgId], references: [id], onDelete: Cascade)
+  createdAt    DateTime     @default(now())
+}
+
+model Client {
+  id        Int          @id @default(autoincrement())
+  orgId     Int
+  name      String
+  createdAt DateTime     @default(now())
+  org       Organization @relation(fields: [orgId], references: [id], onDelete: Cascade)
+  projects  Project[]
+
+  @@index([orgId])
+}
+
+model Project {
+  id        Int             @id @default(autoincrement())
+  orgId     Int
+  clientId  Int
+  name      String
+  scopeText String?         @db.Text
+  createdAt DateTime        @default(now())
+  org       Organization    @relation(fields: [orgId], references: [id], onDelete: Cascade)
+  client    Client          @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  requests  ClientRequest[]
+
+  @@index([orgId])
+}
+
+enum Verdict {
+  PENDING
+  IN_SCOPE
+  OUT_OF_SCOPE
+  UNCLEAR
+}
+
+enum RequestStatus {
+  OPEN
+  CHANGE_ORDER_SENT
+  APPROVED
+  DISMISSED
+}
+
+model ClientRequest {
+  id        Int           @id @default(autoincrement())
+  orgId     Int
+  projectId Int
+  message   String        @db.Text
+  verdict   Verdict       @default(PENDING)
+  status    RequestStatus @default(OPEN)
+  createdAt DateTime      @default(now())
+  org       Organization  @relation(fields: [orgId], references: [id], onDelete: Cascade)
+  project   Project       @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@index([orgId, projectId])
+}
